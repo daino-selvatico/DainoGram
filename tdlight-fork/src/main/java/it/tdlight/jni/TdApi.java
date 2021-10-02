@@ -1,4 +1,4 @@
-package org.drinkless.td.libcore.telegram;
+package it.tdlight.jni;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

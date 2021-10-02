@@ -3,8 +3,10 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+//        maven { url "https://mvn.mchv.eu/repository/mchv/" }
         jcenter() // Warning: this repository is going to shut down soon
     }
 }
 rootProject.name = "DainoGram"
 include ':app'
+include ':tdlight-fork'
