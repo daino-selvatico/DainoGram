@@ -1,7 +1,7 @@
 package it.tdlight.client;
 
 import it.tdlight.common.utils.ScannerUtils;
-import it.tdlight.jni.TdApi.TermsOfService;
+import org.drinkless.td.libcore.telegram.TdApi.TermsOfService;
 
 final class ScannerClientInteraction implements ClientInteraction {
 

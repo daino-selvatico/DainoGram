@@ -1,6 +1,6 @@
 package it.tdlight.client;
 
-import it.tdlight.jni.TdApi;
+import org.drinkless.td.libcore.telegram.TdApi;
 
 /**
  * Interface for incoming responses from TDLib.

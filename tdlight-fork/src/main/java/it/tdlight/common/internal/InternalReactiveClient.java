@@ -4,9 +4,9 @@ import it.tdlight.common.ClientEventsHandler;
 import it.tdlight.common.ExceptionHandler;
 import it.tdlight.common.ReactiveItem;
 import it.tdlight.common.ReactiveTelegramClient;
-import it.tdlight.jni.TdApi;
-import it.tdlight.jni.TdApi.Error;
-import it.tdlight.jni.TdApi.Function;
+import org.drinkless.td.libcore.telegram.TdApi;
+import org.drinkless.td.libcore.telegram.TdApi.Error;
+import org.drinkless.td.libcore.telegram.TdApi.Function;
 
 import java.time.Duration;
 import java.util.Objects;

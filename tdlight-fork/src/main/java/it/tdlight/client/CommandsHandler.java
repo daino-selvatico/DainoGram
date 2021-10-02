@@ -1,13 +1,13 @@
 package it.tdlight.client;
 
 import it.tdlight.common.TelegramClient;
-import it.tdlight.jni.TdApi;
-import it.tdlight.jni.TdApi.Chat;
-import it.tdlight.jni.TdApi.Error;
-import it.tdlight.jni.TdApi.Message;
-import it.tdlight.jni.TdApi.MessageText;
-import it.tdlight.jni.TdApi.UpdateNewMessage;
-import it.tdlight.jni.TdApi.User;
+import org.drinkless.td.libcore.telegram.TdApi;
+import org.drinkless.td.libcore.telegram.TdApi.Chat;
+import org.drinkless.td.libcore.telegram.TdApi.Error;
+import org.drinkless.td.libcore.telegram.TdApi.Message;
+import org.drinkless.td.libcore.telegram.TdApi.MessageText;
+import org.drinkless.td.libcore.telegram.TdApi.UpdateNewMessage;
+import org.drinkless.td.libcore.telegram.TdApi.User;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Optional;

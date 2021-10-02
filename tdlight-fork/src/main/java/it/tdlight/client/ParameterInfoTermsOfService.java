@@ -1,6 +1,6 @@
 package it.tdlight.client;
 
-import it.tdlight.jni.TdApi.TermsOfService;
+import org.drinkless.td.libcore.telegram.TdApi.TermsOfService;
 import java.util.Objects;
 import java.util.StringJoiner;
 

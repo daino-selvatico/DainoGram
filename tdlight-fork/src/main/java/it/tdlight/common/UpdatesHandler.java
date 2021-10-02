@@ -1,6 +1,6 @@
 package it.tdlight.common;
 
-import it.tdlight.jni.TdApi.Object;
+import org.drinkless.td.libcore.telegram.TdApi.Object;
 import java.util.List;
 
 /**
@@ -11,8 +11,8 @@ public interface UpdatesHandler {
 	/**
 	 * Callback called on incoming update from TDLib.
 	 *
-	 * @param object Updates of type {@link it.tdlight.jni.TdApi.Update} about new events, or {@link
-	 *               it.tdlight.jni.TdApi.Error}.
+	 * @param object Updates of type {@link org.drinkless.td.libcore.telegram.TdApi.Update} about new events, or {@link
+	 *               org.drinkless.td.libcore.telegram.TdApi.Error}.
 	 */
 	void onUpdates(List<Object> object);
 }

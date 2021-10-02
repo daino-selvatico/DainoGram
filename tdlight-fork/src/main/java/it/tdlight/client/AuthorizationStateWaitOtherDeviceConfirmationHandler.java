@@ -2,8 +2,8 @@ package it.tdlight.client;
 
 import it.tdlight.common.ExceptionHandler;
 import it.tdlight.common.TelegramClient;
-import it.tdlight.jni.TdApi.AuthorizationStateWaitOtherDeviceConfirmation;
-import it.tdlight.jni.TdApi.UpdateAuthorizationState;
+import org.drinkless.td.libcore.telegram.TdApi.AuthorizationStateWaitOtherDeviceConfirmation;
+import org.drinkless.td.libcore.telegram.TdApi.UpdateAuthorizationState;
 
 final class AuthorizationStateWaitOtherDeviceConfirmationHandler
 		implements GenericUpdateHandler<UpdateAuthorizationState> {

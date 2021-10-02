@@ -1,7 +1,7 @@
 package it.tdlight.client;
 
-import it.tdlight.jni.TdApi.Object;
-import it.tdlight.jni.TdApi.Update;
+import org.drinkless.td.libcore.telegram.TdApi.Object;
+import org.drinkless.td.libcore.telegram.TdApi.Update;
 
 /**
  * Interface for incoming updates from TDLib.

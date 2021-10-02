@@ -1,6 +1,6 @@
 package it.tdlight.common;
 
-import it.tdlight.jni.TdApi;
+import org.drinkless.td.libcore.telegram.TdApi;
 import java.time.Duration;
 import org.reactivestreams.Publisher;
 

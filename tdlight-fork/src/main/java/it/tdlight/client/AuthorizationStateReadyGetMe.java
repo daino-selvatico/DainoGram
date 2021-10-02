@@ -6,11 +6,11 @@ import org.slf4j.LoggerFactory;
 import java.util.concurrent.atomic.AtomicReference;
 
 import it.tdlight.common.TelegramClient;
-import it.tdlight.jni.TdApi.AuthorizationStateReady;
-import it.tdlight.jni.TdApi.Error;
-import it.tdlight.jni.TdApi.GetMe;
-import it.tdlight.jni.TdApi.UpdateAuthorizationState;
-import it.tdlight.jni.TdApi.User;
+import org.drinkless.td.libcore.telegram.TdApi.AuthorizationStateReady;
+import org.drinkless.td.libcore.telegram.TdApi.Error;
+import org.drinkless.td.libcore.telegram.TdApi.GetMe;
+import org.drinkless.td.libcore.telegram.TdApi.UpdateAuthorizationState;
+import org.drinkless.td.libcore.telegram.TdApi.User;
 
 final class AuthorizationStateReadyGetMe implements GenericUpdateHandler<UpdateAuthorizationState> {
 

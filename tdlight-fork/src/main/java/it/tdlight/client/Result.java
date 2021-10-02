@@ -1,7 +1,7 @@
 package it.tdlight.client;
 
-import it.tdlight.jni.TdApi;
-import it.tdlight.jni.TdApi.Error;
+import org.drinkless.td.libcore.telegram.TdApi;
+import org.drinkless.td.libcore.telegram.TdApi.Error;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.StringJoiner;

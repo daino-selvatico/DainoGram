@@ -5,10 +5,10 @@ import it.tdlight.common.ExceptionHandler;
 import it.tdlight.common.ResultHandler;
 import it.tdlight.common.TelegramClient;
 import it.tdlight.common.UpdatesHandler;
-import it.tdlight.jni.TdApi;
-import it.tdlight.jni.TdApi.Error;
-import it.tdlight.jni.TdApi.Function;
-import it.tdlight.jni.TdApi.Object;
+import org.drinkless.td.libcore.telegram.TdApi;
+import org.drinkless.td.libcore.telegram.TdApi.Error;
+import org.drinkless.td.libcore.telegram.TdApi.Function;
+import org.drinkless.td.libcore.telegram.TdApi.Object;
 import it.unimi.dsi.fastutil.longs.LongArrayList;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import java.util.Objects;
@@ -124,7 +124,6 @@ public final class InternalClient implements ClientEventsHandler, TelegramClient
 		}
 	}
 
-	@Override
 	public void initialize(UpdatesHandler updatesHandler,
 			ExceptionHandler updateExceptionHandler,
 			ExceptionHandler defaultExceptionHandler) {
@@ -134,7 +133,6 @@ public final class InternalClient implements ClientEventsHandler, TelegramClient
 		createAndRegisterClient();
 	}
 
-	@Override
 	public void initialize(ResultHandler updateHandler,
 			ExceptionHandler updateExceptionHandler,
 			ExceptionHandler defaultExceptionHandler) {
@@ -172,7 +170,6 @@ public final class InternalClient implements ClientEventsHandler, TelegramClient
 		NativeClientAccess.send(clientId, queryId, query);
 	}
 
-	@Override
 	public Object execute(Function query) {
 		logger.trace(TG_MARKER, "Trying to execute {}", query);
 		if (isClosedAndMaybeThrow(query)) {

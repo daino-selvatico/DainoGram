@@ -1,6 +1,6 @@
 package it.tdlight.common;
 
-import it.tdlight.jni.TdApi.Object;
+import org.drinkless.td.libcore.telegram.TdApi.Object;
 
 public interface EventsHandler {
 

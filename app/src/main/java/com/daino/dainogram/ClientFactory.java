@@ -1,12 +1,15 @@
 package com.daino.dainogram;
 
 
-import static it.tdlight.jni.TdApi.*;
+import static org.drinkless.td.libcore.telegram.TdApi.*;
 
 import android.app.Application;
 import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
+
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import it.tdlight.client.APIToken;
 import it.tdlight.client.AuthenticationData;
@@ -20,7 +23,7 @@ import it.tdlight.common.utils.CantLoadLibrary;
 public class ClientFactory {
     private static SimpleTelegramClient telegramClient;
 
-    public static SimpleTelegramClient buildClient(Integer apiId, String apiHash) throws CantLoadLibrary {
+    public static SimpleTelegramClient buildClient(Integer apiId, String apiHash, Context applicationContext) throws CantLoadLibrary {
         Init.start();
 
         // Obtain the API token
@@ -28,6 +31,8 @@ public class ClientFactory {
 
         // Configure the client
         TDLibSettings settings = TDLibSettings.create(apiToken);
+        settings.setDatabaseDirectoryPath(Paths.get(String.valueOf(applicationContext.getFilesDir()).concat("/database")));
+        settings.setDownloadedFilesDirectoryPath(Paths.get(String.valueOf(applicationContext.getFilesDir()).concat("/download")));
 
         telegramClient = new SimpleTelegramClient(settings);
 
@@ -67,9 +72,10 @@ public class ClientFactory {
                 Log.d("ClientFactory","Received new message from chat " + chatName + ": " + text);
             });
 
-            // Start the client
-            telegramClient.start(authenticationData);
         });
+
+        // Start the client
+        telegramClient.start(authenticationData);
 
         return telegramClient;
     }

@@ -35,14 +35,8 @@ public final class Init {
 	 */
 	public synchronized static void start() throws CantLoadLibrary {
 		if (!started) {
-			Os os = LoadLibrary.getOs();
-
-			if (os == Os.WINDOWS) {
-				// Since 3.0.0, libraries for windows are statically compiled into tdjni.dll
-			}
-
-			LoadLibrary.load("tdjni");
 			ConstructorDetector.init();
+			System.loadLibrary("tdjni");
 			started = true;
 		}
 	}

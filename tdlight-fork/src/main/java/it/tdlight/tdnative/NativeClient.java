@@ -1,6 +1,6 @@
 package it.tdlight.tdnative;
 
-import it.tdlight.jni.TdApi;
+import org.drinkless.td.libcore.telegram.TdApi;
 
 public class NativeClient {
 

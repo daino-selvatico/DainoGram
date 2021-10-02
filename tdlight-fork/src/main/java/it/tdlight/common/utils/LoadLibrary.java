@@ -37,15 +37,15 @@ public final class LoadLibrary {
 	private static final String libsVersion =
 			LibraryVersion.IMPLEMENTATION_NAME + "-" + LibraryVersion.VERSION + "-" + LibraryVersion.NATIVES_VERSION;
 
-	static {
-		if (Files.notExists(librariesPath)) {
-			try {
-				Files.createDirectories(librariesPath);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-	}
+//	static {
+//		if (Files.notExists(librariesPath)) {
+//			try {
+//				Files.createDirectories(librariesPath);
+//			} catch (IOException e) {
+//				e.printStackTrace();
+//			}
+//		}
+//	}
 
 	/**
 	 * Load a library installed in the system (priority choice) or a library included in the jar.
@@ -54,18 +54,19 @@ public final class LoadLibrary {
 	 * @throws CantLoadLibrary An exception that is thrown when the LoadLibrary class fails to load the library.
 	 */
 	public static void load(String libname) throws CantLoadLibrary {
-		if (libname == null || libname.trim().isEmpty()) {
-			throw new IllegalArgumentException();
-		}
-
-		if (libraryLoaded.containsKey(libname)) {
-			if (libraryLoaded.get(libname)) {
-				return;
-			}
-		}
-
-		loadLibrary(libname);
-		libraryLoaded.put(libname, true);
+//		if (libname == null || libname.trim().isEmpty()) {
+//			throw new IllegalArgumentException();
+//		}
+//
+//		if (libraryLoaded.containsKey(libname)) {
+//			if (libraryLoaded.get(libname)) {
+//				return;
+//			}
+//		}
+//
+//		loadLibrary(libname);
+//		libraryLoaded.put(libname, true);
+		System.loadLibrary(libname);
 	}
 
 	private static void loadLibrary(String libname) throws CantLoadLibrary {

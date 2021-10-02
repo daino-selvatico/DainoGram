@@ -3,8 +3,8 @@ package it.tdlight.common.internal;
 import it.tdlight.common.EventsHandler;
 import it.tdlight.common.utils.IntSwapper;
 import it.tdlight.common.utils.SpinWaitSupport;
-import it.tdlight.jni.TdApi;
-import it.tdlight.jni.TdApi.Object;
+import org.drinkless.td.libcore.telegram.TdApi;
+import org.drinkless.td.libcore.telegram.TdApi.Object;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -58,7 +58,7 @@ public final class ResponseReceiver extends Thread implements AutoCloseable {
 		int[] sortIndex;
 		try {
 			while (!closeRequested || !registeredClients.isEmpty()) {
-				int resultsCount = NativeClientAccess.receive(clientIds, eventIds, events, 2.0 /*seconds*/);
+				int resultsCount = org.drinkless.td.libcore.telegram.NativeClient.clientReceive(clientIds[0], eventIds, events, 2.0 /*seconds*/);
 
 				if (resultsCount <= 0) {
 					SpinWaitSupport.onSpinWait();

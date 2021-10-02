@@ -9,10 +9,12 @@ import it.tdlight.common.TelegramClient;
 import it.tdlight.common.internal.CommonClientManager;
 import it.tdlight.common.utils.CantLoadLibrary;
 import it.tdlight.common.utils.LibraryVersion;
-import it.tdlight.jni.TdApi;
-import it.tdlight.jni.TdApi.Error;
-import it.tdlight.jni.TdApi.Function;
-import it.tdlight.jni.TdApi.User;
+
+import org.drinkless.td.libcore.telegram.Client;
+import org.drinkless.td.libcore.telegram.TdApi;
+import org.drinkless.td.libcore.telegram.TdApi.Error;
+import org.drinkless.td.libcore.telegram.TdApi.Function;
+import org.drinkless.td.libcore.telegram.TdApi.User;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.nio.file.Files;
@@ -36,14 +38,13 @@ public final class SimpleTelegramClient implements Authenticable {
 			throw new RuntimeException("Can't load native libraries", e);
 		}
 		try {
-			//noinspection deprecation
-			Log.setVerbosityLevel(1);
+			new TdApi.SetLogVerbosityLevel(1);
 		} catch (Throwable ex) {
 			logger.warn("Can't set verbosity level", ex);
 		}
 	}
 
-	private final TelegramClient client;
+	private Client client = null;
 	private ClientInteraction clientInteraction = new ScannerClientInteraction(this);
 	private final TDLibSettings settings;
 	private AuthenticationData authenticationData;
@@ -59,8 +60,8 @@ public final class SimpleTelegramClient implements Authenticable {
 	private final CountDownLatch closed = new CountDownLatch(1);
 
 	public SimpleTelegramClient(TDLibSettings settings) {
-		this.client = CommonClientManager.create(LibraryVersion.IMPLEMENTATION_NAME);
 		this.settings = settings;
+		this.client = Client.create(this::handleUpdate, this::handleUpdateException, this::handleDefaultException);
 		this.addUpdateHandler(TdApi.UpdateAuthorizationState.class,
 				new AuthorizationStateWaitTdlibParametersHandler(client, settings, this::handleDefaultException));
 		this.addUpdateHandler(TdApi.UpdateAuthorizationState.class,
@@ -83,6 +84,30 @@ public final class SimpleTelegramClient implements Authenticable {
 		AtomicReference<User> me = new AtomicReference<>();
 		this.addUpdateHandler(TdApi.UpdateAuthorizationState.class, new AuthorizationStateReadyGetMe(client, me));
 		this.addUpdateHandler(TdApi.UpdateNewMessage.class, new CommandsHandler(client, this.commandHandlers, me));
+	}
+
+	/**
+	 * Start the client
+	 */
+	public void start(AuthenticationData authenticationData) {
+		this.authenticationData = authenticationData;
+
+		//TODO port to Android
+		createDirectories();
+//		client.initialize(this::handleUpdate, this::handleUpdateException, this::handleDefaultException);
+		new Thread(client, "TDLib thread").start();
+
+		// Handle unexpected shutdown
+		Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+			try {
+				// Send close function
+				this.client.send(new TdApi.Close(), ok -> {}, ex -> {});
+				// Wait until the client has been closed successfully
+				this.waitForExit();
+			} catch (Throwable ignored) {
+				// Ignore errors since we are shutting down everything
+			}
+		}));
 	}
 
 	private void handleUpdate(TdApi.Object update) {
@@ -165,27 +190,6 @@ public final class SimpleTelegramClient implements Authenticable {
 	 */
 	public void addDefaultExceptionHandler(ExceptionHandler defaultExceptionHandlers) {
 		this.defaultExceptionHandlers.add(defaultExceptionHandlers);
-	}
-
-	/**
-	 * Start the client
-	 */
-	public void start(AuthenticationData authenticationData) {
-		this.authenticationData = authenticationData;
-		createDirectories();
-		client.initialize(this::handleUpdate, this::handleUpdateException, this::handleDefaultException);
-
-		// Handle unexpected shutdown
-		Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-			try {
-				// Send close function
-				this.client.send(new TdApi.Close(), ok -> {}, ex -> {});
-				// Wait until the client has been closed successfully
-				this.waitForExit();
-			} catch (Throwable ignored) {
-				// Ignore errors since we are shutting down everything
-			}
-		}));
 	}
 
 	private void createDirectories() {

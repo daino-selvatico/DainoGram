@@ -2,13 +2,13 @@ package it.tdlight.client;
 
 import it.tdlight.common.ExceptionHandler;
 import it.tdlight.common.TelegramClient;
-import it.tdlight.jni.TdApi.AuthorizationStateWaitEncryptionKey;
-import it.tdlight.jni.TdApi.AuthorizationStateWaitTdlibParameters;
-import it.tdlight.jni.TdApi.CheckDatabaseEncryptionKey;
-import it.tdlight.jni.TdApi.Error;
-import it.tdlight.jni.TdApi.SetTdlibParameters;
-import it.tdlight.jni.TdApi.TdlibParameters;
-import it.tdlight.jni.TdApi.UpdateAuthorizationState;
+import org.drinkless.td.libcore.telegram.TdApi.AuthorizationStateWaitEncryptionKey;
+import org.drinkless.td.libcore.telegram.TdApi.AuthorizationStateWaitTdlibParameters;
+import org.drinkless.td.libcore.telegram.TdApi.CheckDatabaseEncryptionKey;
+import org.drinkless.td.libcore.telegram.TdApi.Error;
+import org.drinkless.td.libcore.telegram.TdApi.SetTdlibParameters;
+import org.drinkless.td.libcore.telegram.TdApi.TdlibParameters;
+import org.drinkless.td.libcore.telegram.TdApi.UpdateAuthorizationState;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

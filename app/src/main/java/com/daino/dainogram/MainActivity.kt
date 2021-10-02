@@ -6,6 +6,7 @@ import android.util.Log
 import android.widget.Button
 import android.widget.Toast
 import com.daino.dainogram.databinding.ActivityMainBinding
+import it.tdlight.client.AuthenticationData
 import it.tdlight.client.SimpleTelegramClient
 
 
@@ -31,7 +32,7 @@ class MainActivity : Activity() {
         var btn = findViewById<Button>(R.id.startBtn)
         btn.setOnClickListener {
             try {
-                var client : SimpleTelegramClient = ClientFactory.buildClient(API_ID, API_HASH)
+                var client : SimpleTelegramClient = ClientFactory.buildClient(API_ID, API_HASH, applicationContext)
                 Toast.makeText(applicationContext, "Telegram Started", Toast.LENGTH_SHORT).show()
             } catch (e: Exception) {
                 Toast.makeText(applicationContext, "Cannot Start Telegram", Toast.LENGTH_SHORT).show()

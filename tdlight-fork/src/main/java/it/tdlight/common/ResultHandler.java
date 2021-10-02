@@ -1,6 +1,6 @@
 package it.tdlight.common;
 
-import it.tdlight.jni.TdApi.Object;
+import org.drinkless.td.libcore.telegram.TdApi.Object;
 
 /**
  * Interface for handler for results of queries to TDLib and incoming updates from TDLib.

@@ -17,7 +17,7 @@
 
 package it.tdlight.common;
 
-import it.tdlight.jni.TdApi;
+import org.drinkless.td.libcore.telegram.TdApi;
 import java.util.Objects;
 import java.util.StringJoiner;
 

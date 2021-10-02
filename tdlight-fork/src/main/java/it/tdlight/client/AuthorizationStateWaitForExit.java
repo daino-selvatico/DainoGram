@@ -1,9 +1,9 @@
 package it.tdlight.client;
 
 import it.tdlight.common.TelegramClient;
-import it.tdlight.jni.TdApi;
-import it.tdlight.jni.TdApi.AuthorizationStateClosed;
-import it.tdlight.jni.TdApi.UpdateAuthorizationState;
+import org.drinkless.td.libcore.telegram.TdApi;
+import org.drinkless.td.libcore.telegram.TdApi.AuthorizationStateClosed;
+import org.drinkless.td.libcore.telegram.TdApi.UpdateAuthorizationState;
 import java.util.concurrent.CountDownLatch;
 
 final class AuthorizationStateWaitForExit implements GenericUpdateHandler<TdApi.UpdateAuthorizationState> {

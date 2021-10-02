@@ -1,6 +1,6 @@
 package it.tdlight.client;
 
-import it.tdlight.jni.TdApi.AuthenticationCodeType;
+import org.drinkless.td.libcore.telegram.TdApi.AuthenticationCodeType;
 import java.util.Objects;
 import java.util.StringJoiner;
 

@@ -1,6 +1,6 @@
 package it.tdlight.common;
 
-import it.tdlight.jni.TdApi;
+import org.drinkless.td.libcore.telegram.TdApi;
 
 public interface TelegramClient {
 
@@ -11,9 +11,9 @@ public interface TelegramClient {
 	 * @param updateExceptionHandler  Handler in which the errors from updates are received
 	 * @param defaultExceptionHandler Handler that receives exceptions triggered in a handler
 	 */
-	void initialize(UpdatesHandler updatesHandler,
-                    ExceptionHandler updateExceptionHandler,
-                    ExceptionHandler defaultExceptionHandler);
+//	void initialize(UpdatesHandler updatesHandler,
+//                    ExceptionHandler updateExceptionHandler,
+//                    ExceptionHandler defaultExceptionHandler);
 
 	/**
 	 * Initialize the client synchronously.
@@ -22,14 +22,14 @@ public interface TelegramClient {
 	 * @param updateExceptionHandler  Handler in which the errors from updates are received
 	 * @param defaultExceptionHandler Handler that receives exceptions triggered in a handler
 	 */
-	default void initialize(ResultHandler updateHandler,
-                            ExceptionHandler updateExceptionHandler,
-                            ExceptionHandler defaultExceptionHandler) {
-		this.initialize((UpdatesHandler) updates -> updates.forEach(updateHandler::onResult),
-				updateExceptionHandler,
-				defaultExceptionHandler
-		);
-	}
+//	default void initialize(ResultHandler updateHandler,
+//                            ExceptionHandler updateExceptionHandler,
+//                            ExceptionHandler defaultExceptionHandler) {
+//		this.initialize((UpdatesHandler) updates -> updates.forEach(updateHandler::onResult),
+//				updateExceptionHandler,
+//				defaultExceptionHandler
+//		);
+//	}
 
 	/**
 	 * Sends a request to the TDLib.
@@ -62,5 +62,7 @@ public interface TelegramClient {
 	 * @return request result or {@link TdApi.Error}.
 	 * @throws NullPointerException if query is null.
 	 */
-	TdApi.Object execute(TdApi.Function query);
+	static TdApi.Object execute(TdApi.Function query) {
+		return null;
+	}
 }
