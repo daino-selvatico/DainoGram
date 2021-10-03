@@ -6,4 +6,8 @@
     -->
     <string name="hello_world">Hello Square World!</string>
     <string name="start_client">Start Client</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="textview">TextView</string>
+    <string name="welcome">Welcome</string>
 </resources>

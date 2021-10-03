@@ -92,9 +92,7 @@ public final class SimpleTelegramClient implements Authenticable {
 	public void start(AuthenticationData authenticationData) {
 		this.authenticationData = authenticationData;
 
-		//TODO port to Android
 		createDirectories();
-//		client.initialize(this::handleUpdate, this::handleUpdateException, this::handleDefaultException);
 		new Thread(client, "TDLib thread").start();
 
 		// Handle unexpected shutdown

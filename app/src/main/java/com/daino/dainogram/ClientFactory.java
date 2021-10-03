@@ -23,7 +23,7 @@ import it.tdlight.common.utils.CantLoadLibrary;
 public class ClientFactory {
     private static SimpleTelegramClient telegramClient;
 
-    public static SimpleTelegramClient buildClient(Integer apiId, String apiHash, Context applicationContext) throws CantLoadLibrary {
+    public static SimpleTelegramClient buildClient(Context applicationContext,Integer apiId, String apiHash, String phoneNumber) throws CantLoadLibrary {
         Init.start();
 
         // Obtain the API token
@@ -36,8 +36,10 @@ public class ClientFactory {
 
         telegramClient = new SimpleTelegramClient(settings);
 
+        long phoneNumberLong = Long.parseLong(phoneNumber);
+
         // Configure the authentication info
-        AuthenticationData authenticationData = AuthenticationData.consoleLogin();
+        AuthenticationData authenticationData = AuthenticationData.user(phoneNumberLong);
 
         // Add an example update handler that prints when the bot is started
         telegramClient.addUpdateHandler(UpdateAuthorizationState.class, new GenericUpdateHandler<UpdateAuthorizationState>() {

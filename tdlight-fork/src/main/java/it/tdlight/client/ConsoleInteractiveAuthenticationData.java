@@ -61,7 +61,6 @@ final class ConsoleInteractiveAuthenticationData implements AuthenticationData {
         if (initialized) return;
 
 
-        //TODO phonenumber
         String phoneNumber = "PHONE_NUMBER";
 
         long phoneNumberLong = Long.parseLong(phoneNumber);

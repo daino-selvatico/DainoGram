@@ -29,6 +29,7 @@ final class AuthorizationStateWaitCodeHandler implements GenericUpdateHandler<Up
 
     @Override
     public void onUpdate(UpdateAuthorizationState update) {
+        //Verification Code Handler
         if (update.authorizationState.getConstructor() == AuthorizationStateWaitCode.CONSTRUCTOR) {
             AuthorizationStateWaitCode authorizationState =
                     (AuthorizationStateWaitCode) update.authorizationState;
