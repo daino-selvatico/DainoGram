@@ -3,7 +3,7 @@
 # DainoGram
 A Telegram client for Wear OS 3 (Galaxy Watch 4 ecc...)
 
-This client uses a combo of the TdLib and the TdLights libraries.
+This client uses a combo of TdLib and TdLights
 
 What's working:
 - Authentication
