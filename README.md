@@ -7,8 +7,8 @@ This client uses a combo of TdLib and TdLights
 
 What's working:
 - Authentication
-- Reloading the app without the needs of retrieveng asnother auth. code
-- Getting messages (such as chats)
+- Reloading the app without the needs of retrieving another auth. code
+- Getting network messages (such as chats)
 
 TODO:
 - Almost everything
