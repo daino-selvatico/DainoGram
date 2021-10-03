@@ -1,5 +1,7 @@
 package it.tdlight.client;
 
+import com.daino.libsgram.TelegramConfiguration;
+
 import it.tdlight.common.ExceptionHandler;
 import it.tdlight.common.TelegramClient;
 import org.drinkless.td.libcore.telegram.TdApi;
@@ -18,6 +20,7 @@ final class AuthorizationStateWaitCodeHandler implements GenericUpdateHandler<Up
     private final TelegramClient client;
     private final ClientInteraction clientInteraction;
     private final ExceptionHandler exceptionHandler;
+    private static final Logger logger = LoggerFactory.getLogger(AuthorizationStateWaitCodeHandler.class);
 
     public AuthorizationStateWaitCodeHandler(TelegramClient client,
                                              ClientInteraction clientInteraction,
@@ -38,13 +41,27 @@ final class AuthorizationStateWaitCodeHandler implements GenericUpdateHandler<Up
                     authorizationState.codeInfo.timeout,
                     authorizationState.codeInfo.type
             );
-            String code = clientInteraction.onParameterRequest(InputParameter.ASK_CODE, parameterInfo);
-            Function response = new CheckAuthenticationCode(code);
-            client.send(response, ok -> {
-                if (ok.getConstructor() == Error.CONSTRUCTOR) {
-                    throw new TelegramError((Error) ok);
-                }
-            }, exceptionHandler);
+//            String code = clientInteraction.onParameterRequest(InputParameter.ASK_CODE, parameterInfo);
+
+            //Wait for Auth Code to be inserted
+
+            try {
+                TelegramConfiguration.getInstance().setNeedLogin(true);
+                TelegramConfiguration.getInstance().getLoggedStatusSemaphore().release();
+
+                TelegramConfiguration.getInstance().getAuthSemaphore().acquire();
+                logger.info("AuthCode setted!");
+                String code = TelegramConfiguration.getInstance().getAuthCode();
+                TelegramConfiguration.getInstance().getAuthSemaphore().release();
+                Function response = new CheckAuthenticationCode(code);
+                client.send(response, ok -> {
+                    if (ok.getConstructor() == Error.CONSTRUCTOR) {
+                        throw new TelegramError((Error) ok);
+                    }
+                }, exceptionHandler);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

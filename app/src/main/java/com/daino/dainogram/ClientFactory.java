@@ -3,12 +3,14 @@ package com.daino.dainogram;
 
 import static org.drinkless.td.libcore.telegram.TdApi.*;
 
-import android.app.Application;
 import android.content.Context;
+import android.os.Build;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.util.Log;
-import android.widget.Toast;
 
-import java.nio.file.Path;
+import com.daino.libsgram.TelegramConfiguration;
+
 import java.nio.file.Paths;
 
 import it.tdlight.client.APIToken;
@@ -23,7 +25,7 @@ import it.tdlight.common.utils.CantLoadLibrary;
 public class ClientFactory {
     private static SimpleTelegramClient telegramClient;
 
-    public static SimpleTelegramClient buildClient(Context applicationContext,Integer apiId, String apiHash, String phoneNumber) throws CantLoadLibrary {
+    public static SimpleTelegramClient buildClient(Context applicationContext, Integer apiId, String apiHash, String phoneNumber) throws CantLoadLibrary {
         Init.start();
 
         // Obtain the API token
@@ -71,7 +73,11 @@ public class ClientFactory {
                 String chatName = chat.title;
 
                 // Print the message
-                Log.d("ClientFactory","Received new message from chat " + chatName + ": " + text);
+                Log.d("ClientFactory", "Received new message from chat " + chatName + ": " + text);
+                Vibrator v = (Vibrator) applicationContext.getSystemService(Context.VIBRATOR_SERVICE);
+                v.vibrate(VibrationEffect.createOneShot(250, VibrationEffect.DEFAULT_AMPLITUDE));
+
+
             });
 
         });
@@ -85,6 +91,8 @@ public class ClientFactory {
     private static void printStatus(AuthorizationState authorizationState) {
         if (authorizationState instanceof AuthorizationStateReady) {
             Log.d("ClientFactory", "Logged in");
+            TelegramConfiguration.getInstance().setNeedLogin(false);
+            TelegramConfiguration.getInstance().getLoggedStatusSemaphore().release();
         } else if (authorizationState instanceof AuthorizationStateClosing) {
             Log.d("ClientFactory", "Closing...");
         } else if (authorizationState instanceof AuthorizationStateClosed) {

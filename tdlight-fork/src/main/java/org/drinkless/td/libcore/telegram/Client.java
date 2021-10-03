@@ -6,6 +6,8 @@
 //
 package org.drinkless.td.libcore.telegram;
 
+import com.daino.libsgram.TelegramConfiguration;
+
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.locks.Lock;
@@ -92,6 +94,11 @@ public final class Client implements Runnable, TelegramClient {
      */
     @Override
     public void run() {
+        try {
+            TelegramConfiguration.getInstance().getLoggedStatusSemaphore().acquire();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         while (!stopFlag) {
             receiveQueries(300.0 /*seconds*/);
         }
