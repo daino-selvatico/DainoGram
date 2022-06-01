@@ -12,3 +12,6 @@ What's working:
 
 TODO:
 - Almost everything
+
+## UPDATE
+I'm not giving up on this, but at the moment I'm really busy. Everyone who wants to help is welcome 
